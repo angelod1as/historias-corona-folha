@@ -1,0 +1,46 @@
+extend ../layouts/embed
+
+append variables
+	- var kicker = '';
+	- var kicker_link = '';
+	- var section = htmlWebpackPlugin.options.section;
+	- var section_slug = htmlWebpackPlugin.options.sectionSlug;
+	- var special = '';
+	- var special_url = '';
+	- var title = htmlWebpackPlugin.options.title || 'Titulo';
+	- var lead = 'linhafina';
+	- var description = 'Descricao';
+	- var baseURL = htmlWebpackPlugin.options.baseURL;
+	- var preURL = ENV === 'staging' ? 'http://staging.arte.folha.com.br/' : 'https://arte.folha.uol.com.br/';
+	- var url = preURL + baseURL;
+	- var chan = '';
+	- var share_title = title + ' - ' + section;
+	- var share_type = 'article';
+	- var image_social = url + 'images/social.jpg';
+	- var share_description = description || lead;
+	- var publish_date_l = htmlWebpackPlugin.options.date || '01/01/2050';
+	- var publish_time_l = '02:00';
+	- var update_date_l = '25/12/2056';
+	- var update_time_l = '15:35';
+	- var credit = 'Thiago'
+	//- /////////////////////////
+	//- Não mexer aqui para baixo
+	//- /////////////////////////
+	- var publish_date = publish_date_l ? publish_date_l.split('/')[0] + '.' + months[publish_date_l.split('/')[1]-1] + '.' + publish_date_l.split('/')[2] : '';
+	- var publish_time = publish_time_l ? publish_time_l.replace(':', 'h') : '';
+	- var update_date = update_date_l ? update_date_l.split('/')[0] + '.' + months[update_date_l.split('/')[1]-1] + '.' + update_date_l.split('/')[2] : '';
+	- var update_time = update_time_l ? update_time_l.replace(':', 'h') : '';
+	- var publish_date_year = publish_date_l ? publish_date_l.split('/')[2] : '';
+	- var publish_date_month = publish_date_l ? publish_date_l.split('/')[1] : '';
+	- var publish_date_day = publish_date_l ? publish_date_l.split('/')[0] : '';
+	- var publish_time_hour = publish_time_l ? publish_time_l.split(':')[0] : '';
+	- var publish_time_minute = publish_time_l ? publish_time_l.split(':')[1] : '';
+	- var update_date_year = update_date_l ? update_date_l.split('/')[2] : '';
+	- var update_date_month = update_date_l ? update_date_l.split('/')[1] : '';
+	- var update_date_day = update_date_l ? update_date_l.split('/')[0] : '';
+	- var update_time_hour = update_time_l ? update_time_l.split(':')[0] : '';
+	- var update_time_minute = update_time_l ? update_time_l.split(':')[1] : '';
+
+block content
+	#app
+		//#include virtual="./content.html"

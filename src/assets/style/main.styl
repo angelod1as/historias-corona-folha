@@ -1,0 +1,163 @@
+path = '../../../node_modules/folhastyle/src/assets/style/'
+@import	'./vendor/rupture.styl'
+@import path+'variables.styl'
+@import path+'forms.styl'
+@import path+'tabs.styl'
+
+.a
+    max-width: 940px
+    width: 100vw
+    margin: 0 auto
+    overflow: hidden
+
+.f-forms__button_secondary
+    text-transform: uppercase
+    text-decoration: none
+    font-size: 14px !important
+    letter-spacing: 0
+    font-weight: 500
+.persons
+    max-width: 940px
+    width: 100vw
+    margin: 0 auto
+    +below(940px)
+        width 100%
+    &__lead
+        margin-top: 0
+        font-family: 'Folha Grafico', 'FolhaGrafico'
+        text-transform: uppercase
+        color: #333
+        font-size: 14px
+    h3
+        font-family: 'Folha Grafico', 'FolhaGrafico'
+        text-transform: uppercase
+        +below(620px)
+            font-size: .9
+            margin-bottom: 0
+            font-size: 16px
+    &__slide
+        display: grid
+        grid-template-columns: 30px auto 30px
+        min-height: 100px
+        margin-bottom: 150px
+        margin-left: -30px
+        // +below(620px)
+        //     display none
+        &-mobile
+            display: none
+            .close
+                position: absolute
+                top: 0
+                right: 0
+                height: 36px
+                width: 36px
+                font-weight: 200
+                font-size: 35px
+                line-height: 0
+            .prev
+                grid-area: prev
+            .next
+                grid-area: next
+            .persons
+                position: sticky
+                top: 0
+                background-color: #fff
+                h3
+                    margin: 10px 38px
+            .person__active
+                opacity 1 !important
+            .persons__group
+                width: 100vw
+                display flex
+                overflow-x: scroll
+                margin-bottom: 10px
+            .person
+                overflow: visible !important
+                img
+                    +below(620px)
+                        width: 50px !important
+                        height: 64px !important
+                        margin: 0 2px !important
+            &-show
+                display: grid
+                position: fixed
+                top: 0
+                left: 0
+                height: 100vh
+                margin: 0
+                z-index 1000
+                background-color: #fff
+                overflow: auto
+                grid-template-areas: "head head head" "prev main next"
+                grid-template-columns: 30px auto 30px;
+                .persons
+                    grid-area: head
+        p
+            margin: 0
+            padding: 0
+            font-family: 'Folha Grafico', 'FolhaGrafico'
+            color: #333
+        button
+            border: none
+            background-color: #fff
+            cursor: pointer
+            height 200px
+            outline: none
+        .slide
+            display grid
+            grid-template-columns: 191px auto
+            grid-gap: 40px
+            +below(620px)
+                grid-area: main
+                grid-template-columns: auto
+            &__button
+                margin-top: 20px
+            &__title
+                text-transform: uppercase
+                font-weight: 600
+            &__time
+                text-transform: uppercase
+                font-weight: 800
+                font-size: 1.1em
+                color:#0078A4
+                margin-bottom: 20px
+            &__txt
+                font-size: 30px
+                font-family: 'Folha Texto', 'FolhaTexto'
+                font-weight: 300
+
+            img
+                width: 100%
+
+    &__group
+        display: grid
+        grid-template-columns: repeat(11, 1fr)
+        grid-auto-rows: 100px
+        grid-gap: 3px
+        margin-bottom: 50px
+        +below(940px)
+            grid-template-columns: repeat(10, 1fr)
+            grid-gap: 2px
+        +below(620px)
+            grid-template-columns: repeat(6, 1fr)
+            grid-gap: 2px
+            grid-auto-rows: 60px
+        .person
+            margin: 0 !important
+            overflow: hidden
+            opacity .5
+            cursor pointer
+            &__active
+                opacity: 1
+                +below(620px)
+                    opacity .5
+            &__visited
+                outline: solid 5px #398CCB
+                outline-offset: -5px
+            &:hover
+                opacity: 1
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+                object-position: center

@@ -1,0 +1,39 @@
+block variables
+	- var months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+	- var ENV = htmlWebpackPlugin.options.env;
+
+include ../includes/ssi-variables.pug
+//#include virtual="/virtual/3.0/arte/script-app.inc"
+
+doctype html
+html(lang="pt-br")
+	head(prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#")
+		meta(charset='UTF-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+		//#include virtual="/virtual/3.0/arte/head__embed_head.inc"
+
+		//- //#if expr="$QUERY_STRING_UNESCAPED = /parentUrl=([^&]*)/"
+		//- //#set var="parentURL" value="$1"
+		//- //#if expr="$parentURL = /agora.uol/"
+		//- p Agora
+		//- //#endif
+		//- //#endif
+
+		if ENV === 'development'
+			link(rel="stylesheet", href="//staging.arte.folha.com.br/virtual/3.0/arte/article_full-page_style.css")
+
+	body.f-graphic
+		.folha-loader
+			.folha-loader__container
+				img(src='//arte.folha.uol.com.br/library/folhastyle/3.0/images/loading.gif', alt='Imagem de carregamento')
+
+		block content
+		//#include virtual="/virtual/3.0/arte/footer__script-resize.inc"
+		if ENV === 'development'
+			script.
+				(function() {
+					if (document.getElementsByClassName('folha-loader')[0]) {
+						document.getElementsByClassName('folha-loader')[0].style.display = 'none';
+					}
+				})();
