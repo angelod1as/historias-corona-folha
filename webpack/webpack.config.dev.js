@@ -3,6 +3,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 // const HelloWorldPlugin = require('test_plugin');
 
 const PATHS = {
@@ -42,6 +43,9 @@ module.exports = {
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
+		new MomentLocalesPlugin({
+			localesToKeep: ['pt-br'],
+		}),
 		new HtmlPlugin({
 			template: path.join(PATHS.src, 'templates/pages/index.pug'),
 			env: process.env.NODE_ENV,

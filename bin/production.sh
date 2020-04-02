@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 osascript -e 'tell app "Finder" to open location "smb://:@marvel.grupofolha.intranet/infograficos"'
-mkdir -p /Volumes/infograficos/cotidiano/2020/06/05/presos-inocentes/
+mkdir -p /Volumes/infograficos/equilibrioesaude/2020/coronavirus-aqueles-que-perdemos/
 
 printf '\n\e[1;33m%-6s\e[m\n' "┌-----------------------------------┐"
 printf '\e[1;33m%-6s\e[m\n' "|                                   |"
@@ -18,7 +18,7 @@ yarn build
 printf '\n\e[5;33m%-6s\e[m\n' "-------------------------------------"
 printf '\e[5;33m%-6s\e[m' "          Copiando projeto           "
 printf '\n\e[5;33m%-6s\e[m\n\n' "-------------------------------------"
-cp -r build/* /Volumes/infograficos/cotidiano/2020/06/05/presos-inocentes/
+cp -r build/* /Volumes/infograficos/equilibrioesaude/2020/coronavirus-aqueles-que-perdemos/
 
 printf '\n\e[5;33m%-6s\e[m\n' "Url:"
-printf '\e[1;33m%-6s\e[m\n\n' "https://arte.folha.uol.com.br/cotidiano/2020/06/05/presos-inocentes/"
+printf '\e[1;33m%-6s\e[m\n\n' "https://arte.folha.uol.com.br/equilibrioesaude/2020/coronavirus-aqueles-que-perdemos/"
