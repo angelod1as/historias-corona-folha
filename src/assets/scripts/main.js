@@ -23,10 +23,7 @@ fetchJsonp('./json/index.jsonp', {
 	.then(response => response.json())
 	.then((data) => {
 		const rootElement = document.getElementById('app');
-		ReactDOM.render(
-			<App data={data} />,
-			rootElement,
-		);
+		ReactDOM.render(<App data={data} />, rootElement);
 	})
 	.catch((err) => {
 		console.warn(err);

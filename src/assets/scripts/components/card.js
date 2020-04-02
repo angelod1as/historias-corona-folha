@@ -27,7 +27,6 @@ class Card extends React.Component {
 	fetchData() {
 		const { data } = this.props;
 		const self = this;
-		console.log(data.id);
 		fetchJsonp(`./json/${data.id}.jsonp`, {
 			jsonpCallbackFunction: `person${data.id}`,
 		})
@@ -46,7 +45,7 @@ class Card extends React.Component {
 
 		return (
 			<div key={data.id} className="fsp-group__card">
-				<figure><img src={data.picture} alt="" /></figure>
+				<figure><img src={data.picture} width={300} height={400} alt="" /></figure>
 				<div className="fsp-item__article">
 					<header className="fsp-item__header">
 						<h3>{data.name}</h3>

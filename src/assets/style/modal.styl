@@ -1,0 +1,59 @@
+.fsp-modal
+	position: fixed
+	top: 0
+	left: 0
+	width: 100%
+	height: 100%
+	background-color: $white
+	z-index: 5
+	header
+		position: relative
+		min-height: 40px
+		h2
+			font-size: 16px
+			padding: 10px 45px 10px 10px
+		.fsp-button_close
+			position: absolute
+			right: 0
+			top: 0
+			width: 40px
+			height: 40px
+
+	.fsp-carrousel__slider
+		display: block
+		white-space: nowrap
+		overflow-x: auto
+		.fsp-carrousel__item
+			display: inline-block
+			width: 50px
+			margin-right: 2px
+	.fsp-group__card
+		padding: 0 40px 10px
+		flex-direction: column
+		height: calc(100vh - 120px)
+		overflow-y: auto
+		overflow-x: hidden
+		figure
+			max-width: 100%
+			width: 100%
+			padding-bottom: 20px
+		.fsp-item__article
+			width: 100%
+			padding-bottom: 50px
+			.fsp-item__header
+				padding-bottom: 20px
+				p
+					font-size: .9em
+			.fsp-item__text
+				p
+					font-size: 1em
+	.fsp-group__navigation
+		.fsp-navigation__button
+			position: fixed
+			top: 151px
+			height: calc((100vw - 80px) * 4 / 3)
+			&.fsp-navigation__button_left
+				left: 0
+			&.fsp-navigation__button_right
+				right: 0
+

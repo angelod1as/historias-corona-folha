@@ -17,6 +17,22 @@ export default class App extends Component {
 		this.setState({
 			sortedData: filterData(data),
 		});
+		this.markAsRead = this.markAsRead.bind(this);
+	}
+
+	markAsRead(id) {
+		const { sortedData: data } = this.state;
+		const readData = { ...data };
+		Object.keys(data).some(category => data[category].some((item, j) => {
+			if (item.id === id) {
+				data[category][j].read = true;
+				return true;
+			}
+			return false;
+		}));
+		this.setState({
+			sortedData: readData,
+		});
 	}
 
 	render() {
@@ -24,8 +40,10 @@ export default class App extends Component {
 		if (Object.keys(sortedData).length) {
 			return Object.keys(sortedData).reverse().map(key => (
 				<Group
+					key={`week-${key}`}
 					data={sortedData[key]}
-					week={key}
+					week={+key}
+					markAsRead={this.markAsRead}
 				/>
 			));
 		}

@@ -6,7 +6,10 @@
 	width: 100%
 	max-width: 1100px
 	margin: 30px auto
-	padding: 0 40px
+	font-variant-numeric: tabular-nums
+	padding: 0 10px
+	+above(376px)
+		padding: 0 40px
 	img
 		max-width: 100%
 		height: auto
@@ -18,23 +21,30 @@
 		margin: 50px 0
 		h2
 			font-weight: 600
-			text-transform: uppercase
+			// text-transform: uppercase
 			font-size: 18px
 			line-height: 1.1em
 			padding: 0
 		.fsp-group__carrousel
 			padding: 10px 0
-			// display: flex
-			// flex-wrap: wrap
-			// justify-content: space-between
+			.fsp-carrousel__slider
+				display: grid
+				grid-template-columns: repeat(6, 1fr)
+				+above(376px)
+					grid-template-columns: repeat(11, 1fr)
+					grid-gap: 4px
 			.fsp-carrousel__item
-				width: calc((100% / 11) - 4px)
-				display: inline-block
-				margin-right: 3px
+				// width: calc((100% / 11) - 4px)
+				// display: inline-block
+				// margin-right: 3px
+				// margin-bottom: 4px
 				position: relative
-				margin-bottom: 4px
 				cursor: pointer
 				outline: none
+				background-color: $white
+				opacity: .6
+				img
+					width: 100%
 				&::before
 				&::after
 					content: ''
@@ -48,18 +58,43 @@
 					background-color: #fff
 					mix-blend-mode: saturation
 				&::after
-					border: 5px solid $blue-light
-					mix-blend-mode: multiply
+					border: 5px solid #398ccb
+					mix-blend-mode: hard-light
 					opacity: 0
 				&:hover
 				&:focus
 					&::after
 						opacity: 1
+				&.fsp-carrousel__item_read
+					opacity: .2
 				&.fsp-carrousel__item_selected
+					opacity: 1
 					&::before
 						opacity: 0
 					&::after
 						opacity: 1
+			.fsp-progress
+				width: 100%
+				padding:  0 10px
+				.fsp-progress__label
+					font-size: 14px
+				.fsp-progress__bar
+					position: relative
+					height: 3px
+					.fsp-progress__background
+						position: absolute
+						top: 0
+						left: 0
+						background-color: rgba($blue, .2)
+						width: 100%
+						height: 100%
+					.fsp-progress__evolution
+						position: absolute
+						top: 0
+						left: 0
+						background-color: $blue
+						width: 0%
+						height: 100%
 		.fsp-group__main
 			position: relative
 			.fsp-group__card
@@ -67,17 +102,23 @@
 				justify-content: space-between
 				figure
 					width: 190px
+					max-width: calc(40% - 10px)
+					img
+						width: 100%
 				.fsp-item__article
-					width: calc(100% - 200px)
+					width: calc(100% - 230px)
+					min-width: 60%
+					flex-shrink: 0
+					flex-grow: 0
 					.fsp-item__header
-						padding-bottom: 10px
+						padding-bottom: 30px
 						h3
 							font-weight: 600
-							text-transform: uppercase
+							// text-transform: uppercase
 							line-height: 1em
 						p
 							font-size: 18px
-							line-height: 1.3em
+							line-height: 1.2em
 							padding: 0
 							strong
 								text-transform: uppercase
@@ -87,6 +128,7 @@
 						font-family: $base-text-font-family
 						font-weight: 300
 						p
+							font-size: 21px
 							padding: .5em 0
 							&:first-child
 								padding-top: 0
@@ -97,7 +139,7 @@
 				.fsp-navigation__button
 					position: absolute
 					height: 250px
-					width: 30px
+					width: 40px
 					top: 0
 					background-color: $transparent
 					border: 0
@@ -105,6 +147,7 @@
 					left: -40px
 				.fsp-navigation__button_right
 					right: -40px
+		@import './modal.styl'
 // .a
 // 	max-width: 940px
 // 	width: 100vw

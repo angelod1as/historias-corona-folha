@@ -5,64 +5,134 @@ import moment from 'moment';
 import Icons from './icons';
 import Carousel from './carrousel';
 import Card from './card';
+import Modal from './modal';
 
 class Group extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			visible: 0,
-			data: props.data,
+			selected: 0,
+			opened: false,
+			windowWidth: window.outerWidth,
 		};
 		this.changeSelected = this.changeSelected.bind(this);
+		this.closeModal = this.closeModal.bind(this);
+		this.windowResize = this.windowResize.bind(this);
 	}
 
-	changeSelected(index) {
-		this.setState({ visible: index });
+	componentDidMount() {
+		window.addEventListener('resize', this.windowResize);
+	}
+
+	windowResize() {
+		this.setState({ windowWidth: window.outerWidth });
+	}
+
+	changeSelected(index, open = false) {
+		const { markAsRead, data } = this.props;
+		markAsRead(data[index].id);
+		if (open) {
+			this.setState({
+				selected: index,
+				opened: true,
+			});
+		} else {
+			this.setState({
+				selected: index,
+			});
+		}
+	}
+
+	closeModal() {
+		this.setState({ opened: false });
 	}
 
 	render() {
-		const { data, visible: selected } = this.state;
-		const { week } = this.props;
-		const monday = moment(week, 'week').format('DD.MMM.YY').toLowerCase();
-		const sunday = moment(week, 'week').add(6, 'days').format('DD.MMM.YY');
+		const { selected, windowWidth, opened } = this.state;
+		const { data, week } = this.props;
+		const monday = moment(week, 'week').format('DD.MMM.YYYY').toLowerCase();
+		const sunday = moment(week, 'week').add(6, 'days').format('DD.MMM.YYYY').toLowerCase();
 		return (
 			<section className="fsp-person-group">
 				<h2>{`Semana de ${monday} a ${sunday}`}</h2>
 				<Carousel
-					selected={selected}
+					selected={windowWidth > 375 || opened ? selected : null}
 					data={data}
 					onChange={this.changeSelected}
 				/>
 				<div className="fsp-group__main">
-					<Card data={data[selected]} />
-					<nav className="fsp-group__navigation">
-						{selected > 0 ? (
-							<button
-								type="button"
-								className="fsp-navigation__button fsp-navigation__button_left"
-								onClick={() => {
-									this.changeSelected(selected - 1);
-								}}
-							>
-								<i className="fsp-icon">
-									<Icons.Left />
-								</i>
-							</button>
-						) : null}
-						{selected < data.length - 1 ? (
-							<button
-								type="button"
-								className="fsp-navigation__button fsp-navigation__button_right"
-								onClick={() => {
-									this.changeSelected(selected + 1);
-								}}
-							>
-								<i className="fsp-icon">
-									<Icons.Right />
-								</i>
-							</button>
-						) : null}
-					</nav>
+					{windowWidth > 375 ? (
+						<React.Fragment>
+							<Card data={data[selected]} />
+							<nav className="fsp-group__navigation">
+								{selected > 0 ? (
+									<button
+										type="button"
+										className="fsp-navigation__button fsp-navigation__button_left"
+										onClick={() => {
+											this.changeSelected(selected - 1);
+										}}
+									>
+										<i className="fsp-icon">
+											<Icons.Left />
+										</i>
+									</button>
+								) : null}
+								{selected < data.length - 1 ? (
+									<button
+										type="button"
+										className="fsp-navigation__button fsp-navigation__button_right"
+										onClick={() => {
+											this.changeSelected(selected + 1);
+										}}
+									>
+										<i className="fsp-icon">
+											<Icons.Right />
+										</i>
+									</button>
+								) : null}
+							</nav>
+						</React.Fragment>
+					) : null}
+					{windowWidth <= 375 && opened ? (
+						<Modal title={`Semana de ${monday} a ${sunday}`} className="fsp-group__modal" close={this.closeModal}>
+							<Carousel
+								selected={windowWidth > 375 || opened ? selected : null}
+								data={data}
+								onChange={this.changeSelected}
+								progress
+							/>
+							<Card data={data[selected]} />
+							<nav className="fsp-group__navigation">
+								{selected > 0 ? (
+									<button
+										type="button"
+										className="fsp-navigation__button fsp-navigation__button_left"
+										onClick={() => {
+											this.changeSelected(selected - 1);
+										}}
+									>
+										<i className="fsp-icon">
+											<Icons.Left />
+										</i>
+									</button>
+								) : null}
+								{selected < data.length - 1 ? (
+									<button
+										type="button"
+										className="fsp-navigation__button fsp-navigation__button_right"
+										onClick={() => {
+											this.changeSelected(selected + 1);
+										}}
+									>
+										<i className="fsp-icon">
+											<Icons.Right />
+										</i>
+									</button>
+								) : null}
+							</nav>
+						</Modal>
+					) : null}
 				</div>
 			</section>
 		);
@@ -72,10 +142,12 @@ class Group extends React.Component {
 Group.propTypes = {
 	data: PropTypes.array.isRequired,
 	week: PropTypes.number,
+	markAsRead: PropTypes.func,
 };
 
 Group.defaultProps = {
 	week: null,
+	markAsRead: () => { },
 };
 
 export default Group;
