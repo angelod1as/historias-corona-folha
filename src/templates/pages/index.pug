@@ -1,13 +1,13 @@
-extend ../layouts/embed
+extend ../layouts/special
 
 append variables
-	- var kicker = '';
+	- var kicker = 'Aqueles que perdemos';
 	- var kicker_link = '';
 	- var section = htmlWebpackPlugin.options.section;
 	- var section_slug = htmlWebpackPlugin.options.sectionSlug;
-	- var special = '';
-	- var special_url = '';
-	- var title = htmlWebpackPlugin.options.title || 'Titulo';
+	- var special = 'Coronavírus';
+	- var special_url = 'https://www1.folha.uol.com.br/cotidiano/coronavirus/';
+	- var title = 'As histórias das vítimas do novo coronavírus';
 	- var lead = 'linhafina';
 	- var description = 'Descricao';
 	- var baseURL = htmlWebpackPlugin.options.baseURL;
@@ -18,11 +18,11 @@ append variables
 	- var share_type = 'article';
 	- var image_social = url + 'images/social.jpg';
 	- var share_description = description || lead;
-	- var publish_date_l = htmlWebpackPlugin.options.date || '01/01/2050';
+	- var publish_date_l = '04/04/2020';
 	- var publish_time_l = '02:00';
-	- var update_date_l = '25/12/2056';
-	- var update_time_l = '15:35';
-	- var credit = 'Thiago'
+	- var update_date_l = '';
+	- var update_time_l = '';
+	- var credit = ''
 	//- /////////////////////////
 	//- Não mexer aqui para baixo
 	//- /////////////////////////

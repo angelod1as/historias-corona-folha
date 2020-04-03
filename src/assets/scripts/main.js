@@ -16,7 +16,7 @@ moment.locale('pt-br');
 // 	});
 // };
 
-fetchJsonp('./json/index.jsonp', {
+fetchJsonp('http://staging.media.folha.com.br/cotidiano/2020/03/31/mortescovid19/index.json', {
 	jsonpCallbackFunction: 'home_index',
 	timeout: 5000,
 })

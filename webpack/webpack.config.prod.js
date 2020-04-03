@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const PATHS = {
 	build: path.resolve(__dirname, '../build'),
@@ -44,6 +45,9 @@ module.exports = {
 		),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
+		new MomentLocalesPlugin({
+			localesToKeep: ['pt-br'],
+		}),
 		new HtmlPlugin({
 			template: path.join(PATHS.src, 'templates/pages/index.pug'),
 			env: process.env.NODE_ENV,
