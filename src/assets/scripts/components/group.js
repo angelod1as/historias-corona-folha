@@ -53,7 +53,7 @@ class Group extends React.Component {
 		const { data, week } = this.props;
 		return (
 			<section className="fsp-person-group">
-				<GroupTitle week={week} />
+				<GroupTitle week={moment(week, 'week')} />
 				<Carousel
 					selected={windowWidth > 375 || opened ? selected : null}
 					data={data}
@@ -62,7 +62,7 @@ class Group extends React.Component {
 				<div className="fsp-group__main">
 					{windowWidth > 375 ? (
 						<React.Fragment>
-							<Card data={data[selected]} />
+							<Card id={`group-${week}`} onChange={this.changeSelected} data={data} selected={selected} />
 							<nav className="fsp-group__navigation">
 								{selected > 0 ? (
 									<button
@@ -94,14 +94,14 @@ class Group extends React.Component {
 						</React.Fragment>
 					) : null}
 					{windowWidth <= 375 && opened ? (
-						<Modal title={() => (<GroupTitle week={week} />)} className="fsp-group__modal" close={this.closeModal}>
+						<Modal title={() => (<GroupTitle week={moment(week, 'week')} />)} className="fsp-group__modal" close={this.closeModal}>
 							<Carousel
 								selected={windowWidth > 375 || opened ? selected : null}
 								data={data}
 								onChange={this.changeSelected}
 								progress
 							/>
-							<Card data={data[selected]} />
+							<Card id={`group-${week}`} data={data} onChange={this.changeSelected} selected={selected} />
 							<nav className="fsp-group__navigation">
 								{selected > 0 ? (
 									<button

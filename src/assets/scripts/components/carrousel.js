@@ -69,7 +69,11 @@ class Carrousel extends React.Component {
 							}}
 							tabIndex={0}
 						>
-							<img src={person.picture.replace(/_md\.jpg/, '_sm.jpg')} width={300} height={400} alt="" />
+							{person.picture && person.picture.trim().match(/^https?:\/\/f\.i\.uol\.com\.br/) ? (
+								<img src={person.picture.replace(/_md\.jpg/, '_th.jpg')} width={300} height={400} alt="" />
+							) : (
+								<img src="./images/empty.png" width={300} height={400} alt="" />
+							)}
 						</figure>
 					))}
 				</div>

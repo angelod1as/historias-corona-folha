@@ -2,6 +2,7 @@ import moment from 'moment';
 
 const filterData = (data) => {
 	const sortedData = data
+		.filter(a => !!a.death)
 		.map(a => ({
 			...a,
 			death_date: moment(a.death, 'DD/MM/YYYY'),
