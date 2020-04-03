@@ -1,5 +1,5 @@
 {
-	"name": "aqueles-que-perdemos",
+	"name": "as-historias-das-vitimas-do-novo-coronavirus",
 	"version": "1.1.0",
 	"description": "Boilerplate com webpack e react para o interativo da Folha de S.Paulo",
 	"main": "install.js",
@@ -75,8 +75,8 @@
 	"config": {
 		"section": "Equilíbrio e saúde",
 		"sectionSlug": "equilibrio-e-saude",
-		"name": "Aqueles que perdemos",
+		"name": "As histórias das vítimas do novo coronavírus",
 		"date": "2020",
-		"baseURL": "equilibrioesaude/2020/coronavirus-aqueles-que-perdemos/"
+		"baseURL": "equilibrioesaude/2020/as-historias-das-vitimas-do-novo-coronavirus/"
 	}
 }
