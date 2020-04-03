@@ -30,7 +30,7 @@ class Modal extends React.Component {
 			>
 				<header>
 					{title ? (
-						<h2>{title}</h2>
+						title()
 					) : null}
 					<button
 						type="button"
@@ -49,14 +49,14 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-	title: PropTypes.string,
+	title: PropTypes.func,
 	children: PropTypes.node.isRequired,
 	className: PropTypes.string,
 	close: PropTypes.func,
 };
 
 Modal.defaultProps = {
-	title: '',
+	title: () => null,
 	className: '',
 	close: () => {},
 };

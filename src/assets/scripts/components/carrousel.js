@@ -13,13 +13,29 @@ class Carrousel extends React.Component {
 		};
 	}
 
-	componentWillReceiveProps() {
-		this.updateProgress();
+	componentDidMount() {
+		const { data, selected, progress } = this.props;
+		if (progress) {
+			this.updateProgress(data[selected].id);
+		} else {
+			this.updateProgress();
+		}
 	}
 
-	updateProgress() {
-		const { data } = this.props;
+	componentWillReceiveProps({ data, selected, progress }) {
+		if (progress) {
+			this.updateProgress(data[selected].id);
+		} else {
+			this.updateProgress();
+		}
+	}
 
+	updateProgress(id) {
+		const { data } = this.props;
+		if (id) {
+			const element = document.querySelector(`[data-id="${id}"]`);
+			element.parentNode.scrollLeft = element.offsetLeft - (window.innerWidth - element.clientWidth) / 2;
+		}
 		this.setState({ read: data.filter(d => d.read).length });
 	}
 
@@ -34,19 +50,20 @@ class Carrousel extends React.Component {
 					{data.map((person, i) => (
 						<figure
 							key={`person${person.id}`}
+							data-id={progress ? person.id : 'null'}
 							className={[
 								'fsp-carrousel__item',
 								(i === selected ? 'fsp-carrousel__item_selected' : ''),
 								(person.read ? 'fsp-carrousel__item_read' : ''),
 							].join(' ')}
 							onClick={() => {
-								this.updateProgress();
+								if (progress) this.updateProgress(person.id);
 								onChange(i, true);
 							}}
 							onKeyDown={(event) => {
 								if ([13, 32].indexOf(event.keyCode) >= 0) {
 									event.preventDefault();
-									this.updateProgress();
+									if (progress) this.updateProgress(person.id);
 									onChange(i, true);
 								}
 							}}

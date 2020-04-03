@@ -6,6 +6,7 @@ import Icons from './icons';
 import Carousel from './carrousel';
 import Card from './card';
 import Modal from './modal';
+import GroupTitle from './group-title';
 
 class Group extends React.Component {
 	constructor(props) {
@@ -50,11 +51,9 @@ class Group extends React.Component {
 	render() {
 		const { selected, windowWidth, opened } = this.state;
 		const { data, week } = this.props;
-		const monday = moment(week, 'week').format('DD.MMM.YYYY').toLowerCase();
-		const sunday = moment(week, 'week').add(6, 'days').format('DD.MMM.YYYY').toLowerCase();
 		return (
 			<section className="fsp-person-group">
-				<h2>{`Semana de ${monday} a ${sunday}`}</h2>
+				<GroupTitle week={week} />
 				<Carousel
 					selected={windowWidth > 375 || opened ? selected : null}
 					data={data}
@@ -95,7 +94,7 @@ class Group extends React.Component {
 						</React.Fragment>
 					) : null}
 					{windowWidth <= 375 && opened ? (
-						<Modal title={`Semana de ${monday} a ${sunday}`} className="fsp-group__modal" close={this.closeModal}>
+						<Modal title={() => (<GroupTitle week={week} />)} className="fsp-group__modal" close={this.closeModal}>
 							<Carousel
 								selected={windowWidth > 375 || opened ? selected : null}
 								data={data}

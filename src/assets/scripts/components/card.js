@@ -27,7 +27,8 @@ class Card extends React.Component {
 	fetchData() {
 		const { data } = this.props;
 		const self = this;
-		fetchJsonp(`http://staging.media.folha.com.br/cotidiano/2020/03/31/mortescovid19/${data.id}.json`, {
+		// fetchJsonp(`http://staging.media.folha.com.br/cotidiano/2020/03/31/mortescovid19/${data.id}.json`, {
+		fetchJsonp(`./json/${data.id}.json`, {
 			jsonpCallbackFunction: `person${data.id}`,
 		})
 			.then(response => response.json())
