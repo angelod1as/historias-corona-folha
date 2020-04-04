@@ -3,6 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetchJsonp from 'fetch-jsonp';
+import { prettyText } from 'utils';
+
+import Share from './share';
 
 class Card extends React.Component {
 	constructor(props) {
@@ -33,7 +36,7 @@ class Card extends React.Component {
 		const { data: fullData, selected, id } = this.props;
 		const self = this;
 		const data = fullData[selected];
-		document.querySelector(`#${id}`).focus();
+		document.querySelector(`#${id}`).focus({ preventScroll: true });
 		fetchJsonp(`http://staging.media.folha.com.br/cotidiano/2020/03/31/mortescovid19/${data.id}.json`, {
 		// fetchJsonp(`./json/${data.id}.json`, {
 			jsonpCallbackFunction: `person${data.id}`,
@@ -124,17 +127,17 @@ class Card extends React.Component {
 				</figure>
 				<div className="fsp-item__article">
 					<header className="fsp-item__header">
-						<h3>{data.name}</h3>
+						<h3>{data.name} <Share url={`${window.location.origin}${window.location.pathname}#/${data.id}`} /></h3>
 						<p><strong>›</strong> {data.age} anos</p>
 						{itemData.job ? (
-							<p><strong>›</strong> Era {itemData.job}</p>
+							<p><strong>›</strong> {itemData.job}</p>
 						) : null}
 						<p><strong>›</strong> Faleceu em {data.death_date.format('DD.MMM.YYYY').toLowerCase()}</p>
 					</header>
 					{itemData && itemData.text ? (
 						<div className="fsp-item__text">
 							{itemData.text.split(/[\n\r]+/).map((p, i) => (
-								<p key={`${data.id}-${i + 1}`}>{p}</p>
+								<p key={`${data.id}-${i + 1}`}>{prettyText(p)}</p>
 							))}
 						</div>
 					) : null}

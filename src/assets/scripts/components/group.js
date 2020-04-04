@@ -22,7 +22,19 @@ class Group extends React.Component {
 	}
 
 	componentDidMount() {
+		const { data, match: { params: { id } } } = this.props;
 		window.addEventListener('resize', this.windowResize);
+		if (id) {
+			let selected = 0;
+			data.some((item, i) => {
+				if (item.id === id) {
+					selected = i;
+					return true;
+				}
+				return false;
+			});
+			this.changeSelected(selected, true);
+		}
 	}
 
 	windowResize() {
@@ -139,6 +151,7 @@ class Group extends React.Component {
 }
 
 Group.propTypes = {
+	match: PropTypes.object.isRequired,
 	data: PropTypes.array.isRequired,
 	week: PropTypes.number,
 	markAsRead: PropTypes.func,

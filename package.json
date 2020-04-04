@@ -70,6 +70,7 @@
 		"prop-types": "^15.7.2",
 		"react": "^16.8.3",
 		"react-dom": "npm:@hot-loader/react-dom",
+		"react-router-dom": "^5.1.2",
 		"utils": "file:../utils"
 	},
 	"config": {

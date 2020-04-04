@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { HashRouter as Router, Route } from 'react-router-dom';
 
 import filterData from './components/filter-data';
 import Group from './components/group';
@@ -38,14 +39,26 @@ export default class App extends Component {
 	render() {
 		const { sortedData } = this.state;
 		if (Object.keys(sortedData).length) {
-			return Object.keys(sortedData).reverse().map(key => (
-				<Group
-					key={`week-${key}`}
-					data={sortedData[key]}
-					week={+key}
-					markAsRead={this.markAsRead}
-				/>
-			));
+			return (
+				<Router>
+					<Route
+						path="/:id?"
+						render={({ match }) => (
+							<React.Fragment>
+								{Object.keys(sortedData).reverse().map(key => (
+									<Group
+										match={match}
+										key={`week-${key}`}
+										data={sortedData[key]}
+										week={+key}
+										markAsRead={this.markAsRead}
+									/>
+								))}
+							</React.Fragment>
+						)}
+					/>
+				</Router>
+			);
 		}
 		return null;
 	}
