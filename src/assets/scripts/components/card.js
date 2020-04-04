@@ -21,7 +21,6 @@ class Card extends React.Component {
 	}
 
 	componentDidMount() {
-		const { id } = this.props;
 		this.fetchData();
 	}
 
@@ -33,7 +32,9 @@ class Card extends React.Component {
 	}
 
 	fetchData() {
-		const { data: fullData, selected, id } = this.props;
+		const {
+			data: fullData, selected, id, scrollTo,
+		} = this.props;
 		const self = this;
 		const data = fullData[selected];
 		document.querySelector(`#${id}`).focus({ preventScroll: true });
@@ -43,6 +44,12 @@ class Card extends React.Component {
 		})
 			.then(response => response.json())
 			.then((d) => {
+				if (scrollTo) {
+					setTimeout(() => {
+						console.log(document.querySelector(`#${id}`).offsetParent.offsetTop);
+						window.scrollTo(0, document.querySelector(`#${id}`).offsetParent.parentNode.offsetTop);
+					}, 300);
+				}
 				self.setState({ itemData: d[0] });
 			})
 			.catch((err) => {
@@ -152,6 +159,7 @@ Card.propTypes = {
 	id: PropTypes.string.isRequired,
 	onChange: PropTypes.func,
 	selected: PropTypes.number.isRequired,
+	scrollTo: PropTypes.bool.isRequired,
 };
 
 Card.defaultProps = {

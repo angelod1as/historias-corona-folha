@@ -65,6 +65,8 @@
 				&:focus
 					&::after
 						opacity: 1
+					&::before
+						opacity: 0
 				&.fsp-carrousel__item_read
 					opacity: .2
 				&.fsp-carrousel__item_selected
@@ -85,14 +87,14 @@
 						position: absolute
 						top: 0
 						left: 0
-						background-color: rgba($blue, .2)
+						background-color: rgba(#398ccb, .2)
 						width: 100%
 						height: 100%
 					.fsp-progress__evolution
 						position: absolute
 						top: 0
 						left: 0
-						background-color: $blue
+						background-color: #398ccb
 						width: 0%
 						height: 100%
 		.fsp-group__main

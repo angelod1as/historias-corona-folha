@@ -22,10 +22,10 @@ class Group extends React.Component {
 	}
 
 	componentDidMount() {
-		const { data, match: { params: { id } } } = this.props;
+		const { data, week, match: { params: { id } } } = this.props;
 		window.addEventListener('resize', this.windowResize);
 		if (id) {
-			let selected = 0;
+			let selected = null;
 			data.some((item, i) => {
 				if (item.id === id) {
 					selected = i;
@@ -33,7 +33,9 @@ class Group extends React.Component {
 				}
 				return false;
 			});
-			this.changeSelected(selected, true);
+			if (selected) {
+				this.changeSelected(selected, true);
+			}
 		}
 	}
 
@@ -62,7 +64,7 @@ class Group extends React.Component {
 
 	render() {
 		const { selected, windowWidth, opened } = this.state;
-		const { data, week } = this.props;
+		const { data, week, match: { params: { id } } } = this.props;
 		return (
 			<section className="fsp-person-group">
 				<GroupTitle week={moment(week, 'week')} />
@@ -74,7 +76,7 @@ class Group extends React.Component {
 				<div className="fsp-group__main">
 					{windowWidth > 375 ? (
 						<React.Fragment>
-							<Card id={`group-${week}`} onChange={this.changeSelected} data={data} selected={selected} />
+							<Card id={`group-${week}`} scrollTo={data[selected].id === id} onChange={this.changeSelected} data={data} selected={selected} />
 							<nav className="fsp-group__navigation">
 								{selected > 0 ? (
 									<button
