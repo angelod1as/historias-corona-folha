@@ -38,7 +38,7 @@ class Card extends React.Component {
 		const self = this;
 		const data = fullData[selected];
 		document.querySelector(`#${id}`).focus({ preventScroll: true });
-		fetchJsonp(`http://staging.media.folha.com.br/cotidiano/2020/03/31/mortescovid19/${data.id}.json`, {
+		fetchJsonp(`//media.folha.uol.com.br/cotidiano/2020/03/31/mortescovid19/${data.id}.json`, {
 		// fetchJsonp(`./json/${data.id}.json`, {
 			jsonpCallbackFunction: `person${data.id}`,
 		})

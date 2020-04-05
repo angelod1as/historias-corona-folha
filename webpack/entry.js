@@ -20,7 +20,7 @@ module.exports = async () => {
 		'/content.html': ReactDOMServer.renderToStaticMarkup(
 			<App
 				data={await fetchJSONP(
-					'http://staging.media.folha.com.br/poder/2019/02/13/promessa/index.jsonp',
+					'//media.folha.uol.com.br/poder/2019/02/13/promessa/index.jsonp',
 					'index',
 					info => info,
 				)}
