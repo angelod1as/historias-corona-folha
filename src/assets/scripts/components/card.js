@@ -146,6 +146,9 @@ class Card extends React.Component {
 							{itemData.text.split(/[\n\r]+/).map((p, i) => (
 								<p key={`${data.id}-${i + 1}`}>{prettyText(p)}</p>
 							))}
+							{itemData.extra_field ? (
+								<p>Leia o <a href={itemData.extra_field}>perfil completo</a>.</p>
+							) : null}
 						</div>
 					) : null}
 				</div>
