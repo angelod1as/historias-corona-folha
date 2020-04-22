@@ -44,13 +44,14 @@ class Carrousel extends React.Component {
 			data, progress, selected, onChange,
 		} = this.props;
 		const { read } = this.state;
+		console.log(data[0]);
 		return (
 			<nav className="fsp-group__carrousel">
 				<div className="fsp-carrousel__slider">
 					{data.map((person, i) => (
 						<figure
 							key={`person${person.id}`}
-							data-id={progress ? person.id : 'null'}
+							data-id={person.id || 'null'}
 							className={[
 								'fsp-carrousel__item',
 								(i === selected ? 'fsp-carrousel__item_selected' : ''),
@@ -70,7 +71,7 @@ class Carrousel extends React.Component {
 							tabIndex={0}
 						>
 							{person.picture && person.picture.trim().match(/^https?:\/\/f\.i\.uol\.com\.br/) ? (
-								<img src={person.picture.replace(/_md\.jpg/, '_th.jpg')} width={300} height={400} alt="" />
+								<img src={person.picture.replace(/_md\.jpg/, '_th.jpg')} width={300} height={400} alt={person.name} />
 							) : (
 								<img src="./images/empty.png" width={300} height={400} alt="" />
 							)}

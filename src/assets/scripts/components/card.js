@@ -144,7 +144,7 @@ class Card extends React.Component {
 					{itemData && itemData.text ? (
 						<div className="fsp-item__text">
 							{itemData.text.split(/[\n\r]+/).map((p, i) => (
-								<p key={`${data.id}-${i + 1}`}>{prettyText(p)}</p>
+								<p key={`${data.id}-${i + 1}`}>{prettyText(p.replace('&#8194;', ' ').replace('&#8203;', ''))}</p>
 							))}
 							{itemData.extra_field ? (
 								<p>Leia o <a href={itemData.extra_field}>perfil completo</a>.</p>
