@@ -1,69 +1,32 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from 'react-router-dom';
+import moment from 'moment';
 
-import filterData from './components/filter-data';
-import Group from './components/group';
+import Home from './components/home';
+import Profile from './components/profile';
+import Footer from './components/footer';
 
-export default class App extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			sortedData: {},
-		};
-	}
+moment.locale('pt-br');
 
-	componentDidMount() {
-		const { data } = this.props;
-		this.setState({
-			sortedData: filterData(data),
-		});
-		this.markAsRead = this.markAsRead.bind(this);
-	}
+const App = () => (
+	<div className="container">
+		<Router>
+			<Switch>
+				<Route path="/" exact>
+					<Home />
+				</Route>
+				<Route path="/:id">
+					<Profile />
+				</Route>
+			</Switch>
+		</Router>
 
-	markAsRead(id) {
-		const { sortedData: data } = this.state;
-		const readData = { ...data };
-		Object.keys(data).some(category => data[category].some((item, j) => {
-			if (item.id === id) {
-				data[category][j].read = true;
-				return true;
-			}
-			return false;
-		}));
-		this.setState({
-			sortedData: readData,
-		});
-	}
+		<Footer />
+	</div>
+);
 
-	render() {
-		const { sortedData } = this.state;
-		if (Object.keys(sortedData).length) {
-			return (
-				<Router>
-					<Route
-						path="/:id?"
-						render={({ match }) => (
-							<React.Fragment>
-								{Object.keys(sortedData).reverse().map(key => (
-									<Group
-										match={match}
-										key={`week-${key}`}
-										data={sortedData[key]}
-										week={+key}
-										markAsRead={this.markAsRead}
-									/>
-								))}
-							</React.Fragment>
-						)}
-					/>
-				</Router>
-			);
-		}
-		return null;
-	}
-}
-
-App.propTypes = {
-	data: PropTypes.array.isRequired,
-};
+export default App;

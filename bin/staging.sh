@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-osascript -e 'tell app "Finder" to open location "smb://328954:folh%402017@marvel.grupofolha.intranet/staging"'
+osascript -e 'tell app "Finder" to open location "smb://:@marvel.grupofolha.intranet/staging"'
 mkdir -p /Volumes/staging/arte.folha.com.br/equilibrioesaude/2020/historias-das-vitimas-do-novo-coronavirus/
 
 printf '\n\e[1;33m%-6s\e[m\n' "┌-----------------------------------┐"

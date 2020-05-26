@@ -3,7 +3,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 // const HelloWorldPlugin = require('test_plugin');
 
 const PATHS = {
@@ -20,6 +19,7 @@ module.exports = {
 		open: true,
 		overlay: true,
 		host: '0.0.0.0',
+		historyApiFallback: true,
 	},
 	mode: process.env.NODE_ENV || 'development',
 	devtool: 'source-map',
@@ -37,15 +37,13 @@ module.exports = {
 	output: {
 		path: path.join(PATHS.build),
 		filename: 'js/main.js',
+		publicPath: '/',
 	},
 	plugins: [
 		// new HelloWorldPlugin({ options: true }),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-		new MomentLocalesPlugin({
-			localesToKeep: ['pt-br'],
-		}),
 		new HtmlPlugin({
 			template: path.join(PATHS.src, 'templates/pages/index.pug'),
 			env: process.env.NODE_ENV,
@@ -62,17 +60,17 @@ module.exports = {
 			{
 				from: path.join(PATHS.src, 'assets/images'),
 				to: 'images',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, 'assets/json'),
 				to: 'json',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, '../others/**/*'),
 				to: '[path][name].[ext]',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 		]),
 	],

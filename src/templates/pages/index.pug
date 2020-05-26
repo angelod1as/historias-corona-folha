@@ -1,28 +1,28 @@
-extend ../layouts/special
+extend ../layouts/embed
 
 append variables
-	- var kicker = 'Aqueles que perdemos';
+	- var kicker = '';
 	- var kicker_link = '';
 	- var section = htmlWebpackPlugin.options.section;
 	- var section_slug = htmlWebpackPlugin.options.sectionSlug;
-	- var special = 'Coronavírus';
-	- var special_url = 'https://www1.folha.uol.com.br/cotidiano/coronavirus/';
-	- var title = 'Histórias de vítimas do novo coronavírus';
-	- var lead = 'Saiba quem eram alguns dos brasileiros que morreram em decorrência da Covid-19';
-	- var description = 'Saiba quem eram alguns dos brasileiros que morreram em decorrência da Covid-19';
+	- var special = '';
+	- var special_url = '';
+	- var title = htmlWebpackPlugin.options.title || 'Titulo';
+	- var lead = 'linhafina';
+	- var description = lead;
 	- var baseURL = htmlWebpackPlugin.options.baseURL;
 	- var preURL = ENV === 'staging' ? 'http://staging.arte.folha.com.br/' : 'https://arte.folha.uol.com.br/';
 	- var url = preURL + baseURL;
 	- var chan = '';
 	- var share_title = title + ' - ' + section;
 	- var share_type = 'article';
-	- var image_social = url + 'images/share.jpg';
+	- var image_social = '' || 'images/social.jpg';
 	- var share_description = description || lead;
-	- var publish_date_l = '04/04/2020';
+	- var publish_date_l = htmlWebpackPlugin.options.date || '01/01/2050';
 	- var publish_time_l = '02:00';
 	- var update_date_l = '';
 	- var update_time_l = '';
-	- var credit = ''
+	- var credit = 'Autor'
 	//- /////////////////////////
 	//- Não mexer aqui para baixo
 	//- /////////////////////////

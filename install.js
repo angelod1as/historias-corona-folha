@@ -1,9 +1,34 @@
-const fs =  require('fs');
+const fs = require('fs');
 const prompt = require('prompt');
 const colors = require('colors/safe');
-const { slugfy } = require('utils');
 
 const packData = require('./package.json');
+
+const slugfy = (word, options = { hyphens: true, url: true }) => {
+	const hyphens = typeof options.hyphens !== 'undefined' ? options.hyphens : true;
+	const url = typeof options.url !== 'undefined' ? options.url : true;
+	const from = 'ªãàáäâẽèéëêìíïîºõòóöôøùúüûñç';
+	const to = 'aaaaaaeeeeeiiiiooooooouuuunc';
+
+	let w = word.toLowerCase().trim().replace(/\$/g, 's');
+
+	if (url) {
+		w = w
+			.replace(/1º/g, 'primeiro')
+			.replace(/2º/g, 'segundo')
+			.replace(/(\d)%/g, '$1-por-cento')
+			.replace(/%/g, 'porcentagem');
+	}
+
+	for (let i = 0, l = from.length; i < l; i += 1) {
+		w = w.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+	}
+
+	if (hyphens) {
+		return w.replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+	}
+	return w.replace(/[^a-z0-9]+/g, '');
+};
 
 const templates = {
 	staging: `#!/usr/bin/env bash
@@ -60,107 +85,107 @@ printf '\\e[1;33m%-6s\\e[m\\n\\n' "https://arte.folha.uol.com.br/{{baseURL}}"
 }
 
 // if (!packData.config || packData.config.section || packData.config.baseURL) {
-	packData.config = {...packData.config};
+packData.config = { ...packData.config };
 
-	let configData = [
-		{
-			name: 'user',
-			description: colors.green('Usuário:'),
-			type: 'string',
-		},
-		{
-			name: 'password',
-			description: colors.green('Senha:'),
-			type: 'string',
-			hidden: true,
-		},
-	];
+let configData = [
+	{
+		name: 'user',
+		description: colors.green('Usuário:'),
+		type: 'string',
+	},
+	{
+		name: 'password',
+		description: colors.green('Senha:'),
+		type: 'string',
+		hidden: true,
+	},
+];
 
-	if (!packData.config.section) {
-		configData.push({
-			name: 'section',
-			description: colors.green('Editoria:'),
+if (!packData.config.section) {
+	configData.push({
+		name: 'section',
+		description: colors.green('Editoria:'),
+		type: 'string',
+		required: true,
+	});
+}
+
+
+if (!packData.config.baseURL) {
+	const arrayURL = [
+		{
+			name: 'name',
+			description: colors.green('Nome do projeto:'),
 			type: 'string',
 			required: true,
-		});
-	}
+		},
+		{
+			name: 'date',
+			description: colors.green('Data de publicação:'),
+			type: 'string',
+		},
+		// {
+		// 	name: 'baseURL',
+		// 	description: colors.green('Mudar a URL padrão?'),
+		// 	type: 'string',
+		// },
+	];
+	configData = configData.concat(arrayURL);
+}
 
+prompt.message = colors.white('\n');
+prompt.delimiter = '';
+prompt.start();
+prompt.get(configData, (err, result) => {
+	const name = packData.config.name || result.name;
+	const section = packData.config.section || result.section;
+	const date = packData.config.date || result.date;
+	const user = result.user;
+	const password = encodeURIComponent(result.password);
+	packData.name = slugfy(name);
+	const baseURL = packData.config.baseURL || `${slugfy(section)}/${date ? `${date.split('/').reverse().join('/')}/` : ''}${packData.name}/`;
+	packData.config = {
+		section,
+		sectionSlug: slugfy(section),
+		name,
+		date,
+		baseURL,
+	};
+	fs.writeFile(
+		'package.json',
+		JSON.stringify(packData, null, '\t'),
+		(err) => {
+			if (err) throw err;
+			console.log('Projeto iniciado com sucesso!');
+			fs.mkdir('./bin', { recursive: true }, (err) => {
+				fs.writeFile(
+					'./bin/production.sh',
+					templates.production
+						.replace(/{{baseURL}}/g, baseURL)
+						.replace(/{{user}}/g, user)
+						.replace(/{{password}}/g, password),
+					{ mode: 0o755 },
+					(err) => {
+						if (err) throw err;
+						console.log('Script de produção criado!');
+					},
+				);
+				fs.writeFile(
+					'./bin/staging.sh',
+					templates.staging
+						.replace(/{{baseURL}}/g, baseURL)
+						.replace(/{{user}}/g, user)
+						.replace(/{{password}}/g, password),
+					{ mode: 0o755 },
+					(err) => {
+						if (err) throw err;
+						console.log('Script de staging criado!');
+					},
+				);
+			});
+		},
+	);
 
-	if (!packData.config.baseURL) {
-		const arrayURL = [
-			{
-				name: 'name',
-				description: colors.green('Nome do projeto:'),
-				type: 'string',
-				required: true,
-			},
-			{
-				name: 'date',
-				description: colors.green('Data de publicação:'),
-				type: 'string',
-			},
-			// {
-			// 	name: 'baseURL',
-			// 	description: colors.green('Mudar a URL padrão?'),
-			// 	type: 'string',
-			// },
-		];
-		configData = configData.concat(arrayURL);
-	}
-
-	prompt.message = colors.white('\n');
-	prompt.delimiter = '';
-	prompt.start();
-	prompt.get(configData, (err, result) => {
-		const name = packData.config.name || result.name;
-		const section = packData.config.section || result.section;
-		const date = packData.config.date || result.date;
-		const user = result.user;
-		const password = encodeURIComponent(result.password);
-		packData.name = slugfy(name);
-		const baseURL = packData.config.baseURL || `${slugfy(section)}/${date ? `${date.split('/').reverse().join('/')}/` : ''}${packData.name}/`;
-		packData.config = {
-			section,
-			sectionSlug: slugfy(section),
-			name,
-			date,
-			baseURL,
-		};
-		fs.writeFile(
-			'package.json',
-			JSON.stringify(packData, null, '\t'),
-			(err) => {
-				if (err) throw err;
-				console.log('Projeto iniciado com sucesso!');
-				fs.mkdir('./bin', { recursive: true }, (err) => {
-					fs.writeFile(
-						'./bin/production.sh',
-						templates.production
-							.replace(/{{baseURL}}/g, baseURL)
-							.replace(/{{user}}/g, user)
-							.replace(/{{password}}/g, password),
-						{ mode: 0o755 },
-						(err) => {
-							if (err) throw err;
-							console.log('Script de produção criado!');
-						},
-					);
-					fs.writeFile(
-						'./bin/staging.sh',
-						templates.staging
-							.replace(/{{baseURL}}/g, baseURL)
-							.replace(/{{user}}/g, user)
-							.replace(/{{password}}/g, password),
-						{ mode: 0o755 },
-						(err) => {
-							if (err) throw err;
-							console.log('Script de staging criado!');
-						},
-					);
-				});
-			},
-		);
-
-		// return false;
-	});
+	// return false;
+});
 // }

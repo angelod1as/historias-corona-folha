@@ -4,7 +4,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 const PATHS = {
 	build: path.resolve(__dirname, '../build'),
@@ -26,6 +25,7 @@ module.exports = {
 		timings: true,
 		chunks: false,
 		chunkModules: false,
+		historyApiFallback: true,
 	},
 	entry: [
 		'@babel/polyfill',
@@ -34,6 +34,7 @@ module.exports = {
 	output: {
 		path: path.join(PATHS.build),
 		filename: 'js/main.js',
+		publicPath: '/',
 	},
 	plugins: [
 		new CleanWebpackPlugin(
@@ -45,9 +46,6 @@ module.exports = {
 		),
 		new webpack.NamedModulesPlugin(),
 		new webpack.NoEmitOnErrorsPlugin(),
-		new MomentLocalesPlugin({
-			localesToKeep: ['pt-br'],
-		}),
 		new HtmlPlugin({
 			template: path.join(PATHS.src, 'templates/pages/index.pug'),
 			env: process.env.NODE_ENV,
@@ -64,17 +62,17 @@ module.exports = {
 			{
 				from: path.join(PATHS.src, 'assets/images'),
 				to: 'images',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, 'assets/json'),
 				to: 'json',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, '../others/**/*'),
 				to: '[path][name].[ext]',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 		]),
 	],

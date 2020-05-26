@@ -27,6 +27,7 @@ module.exports = {
 		timings: true,
 		chunks: false,
 		chunkModules: false,
+		historyApiFallback: true,
 	},
 	watch: true,
 	entry: [
@@ -36,6 +37,7 @@ module.exports = {
 	output: {
 		path: path.join(PATHS.staging),
 		filename: 'js/main.js',
+		publicPath: '/',
 	},
 	plugins: [
 		new CleanWebpackPlugin(
@@ -64,17 +66,17 @@ module.exports = {
 			{
 				from: path.join(PATHS.src, 'assets/images'),
 				to: 'images',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, 'assets/json'),
 				to: 'json',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 			{
 				from: path.join(PATHS.src, '../others/**/*'),
 				to: '[path][name].[ext]',
-				ignore: '.gitkeep',
+				ignore: ['.gitkeep'],
 			},
 		]),
 	],

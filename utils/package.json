@@ -1,0 +1,21 @@
+{
+  "name": "utils",
+  "version": "1.0.0",
+  "description": "Artefolha utilitários",
+  "main": "build/utils.js",
+  "repository": "git@gitlab.corp.folha.com.br:pilker/utils.git",
+  "author": "Rogerio Pilker <rogerio.luiz@grupofolha.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "tape": "^4.9.2",
+    "zuul": "^3.12.0"
+  },
+  "scripts": {
+    "build": "babel index.js -o build/utils.js",
+    "test": "babel index.js -o build/utils.js && tape \"test/*.js\"",
+    "ztest": "babel index.js -o build/utils.js && zuul --ui tape --local 8080 -- test/*.js"
+  },
+  "dependencies": {}
+}
