@@ -1,0 +1,76 @@
+{
+  "env": {
+    "browser": true,
+		"jasmine": true,
+		"node": true
+	},
+	"globals": {
+		"pym": true,
+		"document":1,
+    "window":1,
+    "page_info":1,
+    "ArteFolha":1,
+    "$":1,
+		"jquery":1,
+		"UOLPD": 1,
+    "pSUPERFLY": 1
+	},
+	"settings": {
+    "html/indent": "tab"
+  },
+	"extends": "airbnb",
+  "rules": {
+    "indent": [
+      2,
+      "tab"
+    ],
+    "no-unused-vars": 1,
+    "no-tabs": 0,
+    "react/jsx-indent": [
+      2,
+      "tab"
+    ],
+    "react/jsx-indent-props": [
+      2,
+      "tab"
+		],
+		"react/no-unused-state": [0],
+    "react/prefer-stateless-function": [
+      1,
+      {
+        "ignorePureComponents": false
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "import/no-named-as-default": false,
+    "jsx-a11y/anchor-is-valid": [
+      1,
+      {
+        "components": [
+          "a"
+        ],
+        "aspects": [
+          "noHref",
+          "invalidHref",
+          "preferButton"
+        ]
+      }
+    ],
+    "react/forbid-prop-types": [
+      1,
+      {
+        "forbid": [
+          "class"
+        ]
+      }
+    ]
+  }
+}

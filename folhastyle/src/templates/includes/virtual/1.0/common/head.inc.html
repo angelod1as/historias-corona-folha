@@ -1,0 +1,25 @@
+<!--#include virtual="top.inc.html"--><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/><meta itemscope="" itemprop="mainEntityOfPage" itemtype="https://schema.org/WebPage" itemid="https://google.com/article"/><title><!--#echo encoding="none" var="title" --> - <!--#echo encoding="none" var="section" --> - Folha de S.Paulo</title><!--#if expr="${description} != '' "--><meta name="description" content="<!--#echo encoding='none' var='description'-->" /><meta property="og:description" content="<!--#echo encoding='none' var='description'-->" /><meta property="twitter:description" content="<!--#echo encoding='none' var='description'-->" /><!--#else--><meta name="description" content="<!--#echo encoding='none' var='lead'-->" /><meta property="og:description" content="<!--#echo encoding='none' var='lead'-->" /><meta property="twitter:description" content="<!--#echo encoding='none' var='lead'-->" /><!--#endif--><meta property="og:url" content="<!--#echo encoding='none' var='url'-->" /><meta property="og:type" content="article" /><meta name="twitter:site" value="@folha" /><!--#if expr="${image} != '' "--><meta property="og:image" content="<!--#echo var='image'-->" /><meta name="twitter:image" content="<!--#echo var='image'-->" /><!--#else--><meta property="og:image" content="http://arte.folha.uol.com.br/library/others/share.png" /><meta name="twitter:image" content="http://arte.folha.uol.com.br/library/others/share.png" /><!--#endif--><meta property="twitter:url" content="<!--#echo var='url'-->" /><!--#if expr="${share_title} != '' "--><meta property="og:title" content="<!--#echo encoding='none' var='title' --> - <!--#echo encoding='none' var='section' --> - Folha de S.Paulo" /><meta property="twitter:title" content="<!--#echo encoding='none' var='title' --> - <!--#echo encoding='none' var='section' --> - Folha de S.Paulo" /><!--#else--><meta property="og:title" content="<!--#echo encoding='none' var='title' --> - Folha de S.Paulo" /><meta property="twitter:title" content="<!--#echo encoding='none' var='title' --> - Folha de S.Paulo" /><!--#endif--><meta name="author" content="<!--#echo encoding='none' var='credit'-->" /><meta name="twitter:creator" value="@folha" /><meta name="twitter:card" value="summary_large_image" /><meta property="og:site_name" content="Folha de S.Paulo"/><meta property="fb:admins" content="100001113241596"/><meta property="fb:app_id" content="1275501329172461"/><meta property="fb:pages" content="100114543363891"/><!--#if expr="$HTTP_HOST == /local/"--><link rel="stylesheet" href="/css/folhastyle.css?<!--#echo var='querystring' -->" /><!--#else--><link rel="stylesheet" href="/library/folhastyle/2.1/css/folhastyle-min.css?<!--#echo var='querystring' -->" /><!--#endif--><!--HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries--><!--WARNING: Respond.js doesn't work if you view the page via file://--><!--[if lt IE 9]><script src="//oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script><script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]--><script src="//arte.folha.uol.com.br/library/modernizr/3.3.1/modernizr.js"></script><script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script><script src="//arte.folha.uol.com.br/library/folhastyle/2.1/js/plugins.js"></script><link rel="shortcut icon" href="//f.i.uol.com.br/favicon.ico"/><script src="//static.folha.uol.com.br/folha/js/5.4/common/common.js?2017011202"></script><!--#include virtual="head-script-audience.inc.html"--><script>folha.information.section = '<!--#echo var="section_slug"-->' ;
+// Advertising
+folha.information.channel = '<!--#echo var="section_slug"-->' ;
+<!--#if expr="$type_page != 'noticias' && $type_page != 'videos'"-->
+folha.tag_manager.floater = true ;
+<!--#endif-->
+<!--#if expr="$keywords"-->
+folha.tag_manager.keywords = '<!--#echo encoding="none" var="keywords"-->' ;
+<!--#endif-->
+// Omniture
+<!--#if expr="$omniture_channel"-->
+folha.information.page.channel = '<!--#echo encoding="none" var="section_name"-->' ;
+<!--#else-->
+folha.information.page.channel = '<!--#echo encoding="none" var="section_name"-->' ;
+<!--#endif-->
+<!--#if expr="$omniture_channel"-->
+folha.information.page.subchannel = '<!--#echo var="omniture_channel"-->' ;
+<!--#elif expr="$category_name"-->
+folha.information.page.subchannel = [ '<!--#echo encoding="none" var="subsection"-->' , '<!--#echo var="category_name"-->' ] ;
+<!--#else-->
+folha.information.page.subchannel = '<!--#echo encoding="none" var="subsection"-->' ;
+<!--#endif-->
+folha.information.page.title = '<!--#echo encoding="none" var="title"-->' ;
+folha.information.page.type = 'infografico' ;
+</script><!--#include virtual="head-page_info.inc.html"--><!-- /Head-->

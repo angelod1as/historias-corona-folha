@@ -1,0 +1,29 @@
+@import 'variables.styl';
+.f-tabs
+    align-items: center
+    border-bottom: 1px solid $gray-200
+    display: inline-flex
+    overflow-x: auto
+    width: 100%
+    &__radio
+        display: none
+    &__item
+        display: inline-block
+        color: $gray-300
+        font-family: $base-font-family
+        font-size: 16px
+        font-weight: 500
+        line-height: 1.5
+        text-transform: uppercase
+        white-space: nowrap
+        margin-right: 2.3em
+        padding: 0.27em 0.27em 3px 0
+        position: relative
+    &__label
+        display: inline-block
+        border-bottom: 3px solid transparent
+        margin-bottom: -0.27em
+        cursor: pointer
+    input:checked+label
+        border-color: $black
+        color: $black

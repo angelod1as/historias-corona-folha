@@ -1,0 +1,7 @@
+<!--#if expr="${desligapaywall}"-->
+<!--#include virtual="/virtual/3.0/arte/paywall.inc"-->
+<!--#else-->
+<script type="text/javascript">$.getScript('//www1.folha.uol.com.br/folha/furniture/paywall/loader.js?t=20170822', function() {
+$('body').append('<scr' + 'ipt src="//paywall.folha.uol.com.br/' + (paywall.isTest() ? 'block' : 'wall') + '.jsonp?callback=paywall.inicio&url=' + paywall.url() + '&referer=' + paywall.referrer() + '&clear=' + encodeURI(new Date()) + '" async><\\/sc' + 'ript>');
+});</script>
+<!--#endif-->
