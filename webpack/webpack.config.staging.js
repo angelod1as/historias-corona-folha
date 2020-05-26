@@ -27,7 +27,7 @@ module.exports = {
 		timings: true,
 		chunks: false,
 		chunkModules: false,
-		historyApiFallback: true,
+		// historyApiFallback: true,
 	},
 	watch: true,
 	entry: [

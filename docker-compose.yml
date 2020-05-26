@@ -7,5 +7,5 @@ services:
       - "443:443"
     volumes:
       - ./build:/usr/local/apache2/htdocs
-      - ./node_modules/folhastyle/src/templates/includes/virtual:/usr/local/apache2/htdocs/virtual
+      - ./folhastyle/src/templates/includes/virtual:/usr/local/apache2/htdocs/virtual
       - ./server/httpd-ssi.conf:/usr/local/apache2/conf/httpd.conf

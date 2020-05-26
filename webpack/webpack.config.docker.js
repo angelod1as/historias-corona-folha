@@ -5,18 +5,20 @@ const HtmlPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const pack = require('../package.json');
+
+const configPath = process.env.npm_package_config_baseURL;
+
 const PATHS = {
+	staging: path.resolve(__dirname, '../build'),
 	build: path.resolve(__dirname, '../build'),
 	src: path.resolve(__dirname, '../src'),
 	js: path.resolve(__dirname, '../src/assets/scripts'),
 };
 
-const foldersToErase = ['dist'];
-
-if (process.env.NODE_CLEAN) foldersToErase.push('build');
-
 module.exports = {
 	mode: 'production',
+	devtool: 'source-map',
 	stats: {
 		assets: false,
 		colors: true,
@@ -27,20 +29,22 @@ module.exports = {
 		chunkModules: false,
 		// historyApiFallback: true,
 	},
+	watch: true,
 	entry: [
 		'@babel/polyfill',
 		path.join(PATHS.js, 'main.js'),
 	],
 	output: {
-		path: path.join(PATHS.build),
+		path: path.join(PATHS.staging),
 		filename: 'js/main.js',
 		publicPath: '/',
 	},
 	plugins: [
 		new CleanWebpackPlugin(
-			foldersToErase,
+			[PATHS.staging],
 			{
 				root: path.resolve(__dirname, '..'),
+				allowExternal: true,
 				verbose: true,
 			},
 		),
@@ -103,17 +107,22 @@ module.exports = {
 						loader: 'css-loader',
 						options: {
 							importLoaders: 1,
+							sourceMap: true,
 						},
 					},
 					{
 						loader: 'postcss-loader',
 						options: {
 							config: {
-								path: path.resolve(__dirname, 'postcss.config.prod.js'),
+								path: path.resolve(__dirname, 'postcss.config.js'),
 							},
+							sourceMap: true,
 						},
 					},
-					'stylus-loader',
+					{
+						loader: 'stylus-loader',
+						options: { sourceMap: true },
+					},
 				],
 			},
 			{

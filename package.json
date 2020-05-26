@@ -54,6 +54,7 @@
 		"build": "NODE_ENV=production webpack -p --config ./webpack/webpack.config.prod.js",
 		"serve": "NODE_ENV=development webpack-dev-server --color --config ./webpack/webpack.config.dev.js",
 		"staging": "NODE_ENV=staging webpack --config ./webpack/webpack.config.staging.js",
+		"docker": "NODE_ENV=staging webpack --config ./webpack/webpack.config.docker.js",
 		"deploy/staging": "./bin/staging.sh",
 		"deploy/production": "./bin/production.sh"
 	},
