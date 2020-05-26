@@ -153,3 +153,9 @@ module.exports = {
 		extensions: ['.js', '.jsx'],
 	},
 };
+
+console.log('\n\n\n\n');
+console.log('WAIT BUILD, then run $ docker-compose up');
+console.log('\n\n');
+console.log('(if you ran compose before this, restart it)');
+console.log('\n\n\n\n');
