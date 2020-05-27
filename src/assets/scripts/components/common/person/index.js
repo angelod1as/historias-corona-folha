@@ -14,14 +14,10 @@ const Person = ({
 			className="person"
 			to={url}
 		>
-			<div className="age-column">
-				<div className="age">{age}</div>
-				<div>anos</div>
-			</div>
-			<div>
-				<div className="name">{name.trim()}</div>
-				<div className="subtitle">subtitle not found</div>
-			</div>
+			<div className="person-age">{age}</div>
+			<div className="person-anos">anos</div>
+			<div className="person-name">{name.trim()}</div>
+			<div className="person-subtitle">subtitle not found</div>
 		</Link>
 	);
 };

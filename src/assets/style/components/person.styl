@@ -2,25 +2,34 @@
 	display: block
 	display: grid
 	grid-template-columns: 40px 1fr
+	grid-template-rows: max-content	max-content
+	grid-template-areas: "age name" "anos subtitle";
 	column-gap: 13px
 	margin-bottom: 32px;
-	align-items: end
+	align-items: flex-end
 	font-family: $base-text-font-family
 	color: $secondary
 	font-size: 15px
 
-	.age-column
+	.person-age
+		align-self: baseline
 		text-align: right
-
-	.age
+		grid-area: age
 		font-weight: bold
 		font-size: 20px
 
-	.name
+	.person-anos
+		grid-area: anos
+		text-align: right
+
+
+	.person-name
+		grid-area: name
 		color: $primary
 		font-weight: bold
 		font-size: 20px
 
-	.subtitle
+	.person-subtitle
+		grid-area: subtitle
 		font-size: 15px
 		font-family: $base-font-family
