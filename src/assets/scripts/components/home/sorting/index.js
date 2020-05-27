@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { uuid } from 'uuidv4';
-import { TiArrowSortedUp, TiArrowSortedDown } from 'react-icons/ti';
+
+import SortSvg from './sortSvg';
 
 const sortList = [
 	{
@@ -35,6 +36,16 @@ const Sorting = ({
 	return (
 		<div>
 			<div className="sorting">
+				<button
+					className="order-icon"
+					type="button"
+					onClick={changeOrder}
+				>
+					{order === 'down'
+						? <SortSvg className="ascending" />
+						: <SortSvg className="descending" />
+					}
+				</button>
 				<label
 					key={uuid()}
 					htmlFor="order"
@@ -58,16 +69,6 @@ const Sorting = ({
 						))}
 					</select>
 				</label>
-				<button
-					className="order-arrow"
-					type="button"
-					onClick={changeOrder}
-				>
-					{order === 'down'
-						? <TiArrowSortedUp />
-						: <TiArrowSortedDown />
-					}
-				</button>
 			</div>
 		</div>
 	);
