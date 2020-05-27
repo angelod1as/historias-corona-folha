@@ -1,16 +1,16 @@
 @import	'./default/main.styl'
+@import './overrides/overrides.styl'
 
-$bg-color = #1F1F1F
-$secondary = #999999
-$primary = #FFFFFF
+$secondary = $gray-150
+$primary = $black
 
 body, html {
-	background-color: $bg-color
+	background-color: $dark
 }
 
 #app
 	max-width: 1400px
-	background-color: $bg-color
+	background-color: $dark
 
 	a
 		&.person
@@ -23,7 +23,6 @@ body, html {
 		min-height: calc(100vh - 60px);
 		justify-content: space-between
 		font-weight: 300
-		color: $primary
 		// home
 		@import './components/home.styl'
 		@import './components/forms.styl'
