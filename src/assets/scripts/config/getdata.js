@@ -1,11 +1,10 @@
 import fetchJsonp from 'fetch-jsonp';
-import moment from 'moment';
 
-const expirationLimit = [2, 'days']; // two days cache;
+const daysBeforeReload = 2; // in days;
 
 const getData = async (loadDataHook, setErrorHook) => {
 	// load from LocalStorage
-	const today = moment();
+	const today = Date.now();
 	const saveName = 'FOLHA_CORONA_MEMORIAL_PaWvhCt43X';
 	const loadedData = localStorage[saveName];
 
@@ -31,11 +30,10 @@ const getData = async (loadDataHook, setErrorHook) => {
 		loadData();
 	} else {
 		const { json, createdAt } = JSON.parse(loadedData);
-		const expirationDate = moment(createdAt)
-			.add(expirationLimit[0], expirationLimit[1]);
-
-		// If data has expired
-		if (moment(today).isSameOrAfter(expirationDate)) {
+		const expirationDate = new Date(createdAt).getTime();
+		const expirationLimit = daysBeforeReload * 86400000; // days * one day in milliseconds
+		const condition = today - expirationDate >= expirationLimit;
+		if (condition) {
 			localStorage.removeItem(saveName);
 			loadData();
 		} else {

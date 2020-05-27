@@ -11,7 +11,7 @@ const PATHS = {
 	js: path.resolve(__dirname, '../src/assets/scripts'),
 };
 
-const foldersToErase = ['dist'];
+const foldersToErase = ['dist', 'build'];
 
 if (process.env.NODE_CLEAN) foldersToErase.push('build');
 
