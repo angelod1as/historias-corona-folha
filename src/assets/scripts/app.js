@@ -4,13 +4,10 @@ import {
 	Switch,
 	Route,
 } from 'react-router-dom';
-import moment from 'moment';
 
 import Home from './components/home';
 import Profile from './components/profile';
 import Footer from './components/footer';
-
-moment.locale('pt-br');
 
 const App = () => (
 	<div className="container">

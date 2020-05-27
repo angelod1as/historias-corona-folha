@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 
 const Left = ({ person }) => {
 	const {
@@ -13,14 +12,16 @@ const Left = ({ person }) => {
 		picture,
 	} = person;
 
-	const deathLocale = moment(death, 'DD/MM/YYYY').format('D.MMM.YYYY');
+	// const deathLocale = moment(death, 'DD/MM/YYYY').format('D.MMM.YYYY');
+	const [day, month, year] = death.split('/');
+	const writtenMonth = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
 
 	return (
 		<div className="left">
 			<img src={picture} alt={`foto de ${name}`} />
 			<p className="name">{name}, {age}</p>
 			<p>{job}</p>
-			<p>faleceu em {deathLocale}</p>
+			<p>faleceu em {+day}.{writtenMonth[+month - 1]}.{+year}</p>
 			<p className="link">
 				<a
 					href={readMore}
