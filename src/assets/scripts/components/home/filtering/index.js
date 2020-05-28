@@ -1,18 +1,13 @@
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { uuid } from 'uuidv4';
 
 import OtherForm from './otherForm';
 import NameForm from './nameForm';
+import FilterSvg from './filterSvg';
 
 const Filtering = ({ filters, setChosenFilters, chosenFilters }) => {
-	// const filter = useCallback(({ target: { id } }) => {
-	// 	console.log('filter');
-	// 	// const sortingType = id.split('sort-')[1];
-	// 	// const isDate = sortingType === 'death';
-	// 	// const result = sortData(sortedData, sortingType, isDate);
-	// 	// setSortedData([...result]);
-	// });
+	const [isOpen, setIsOpen] = useState(false);
 
 	const handleFilter = useCallback((el) => {
 		const newState = Object.assign({}, chosenFilters);
@@ -20,27 +15,40 @@ const Filtering = ({ filters, setChosenFilters, chosenFilters }) => {
 		setChosenFilters(newState);
 	});
 
+	const handleButton = useCallback(() => {
+		setIsOpen(!isOpen);
+	});
+
 	return (
-		<form className="filtering f-forms">
-			{/* Name */}
-			<NameForm
-				handleFilter={handleFilter}
-				name={chosenFilters.name}
-			/>
+		<>
+			<form className="filtering f-forms">
+				<button
+					type="button"
+					onClick={handleButton}
+					className="toggle-button"
+				>Filtrar <FilterSvg fill="#999" />
+				</button>
+				<div className={`${isOpen ? 'open' : 'closed'}`}>
+					{/* Name */}
+					<NameForm
+						handleFilter={handleFilter}
+						name={chosenFilters.name}
+					/>
 
-			{/* Other filters */}
-			{filters.map(({ property, name, elements }) => (
-				<OtherForm
-					key={uuid()}
-					property={property}
-					name={name}
-					elements={elements}
-					handleFilter={handleFilter}
-					chosenFilters={chosenFilters}
-				/>
-			))}
-
-		</form>
+					{/* Other filters */}
+					{filters.map(({ property, name, elements }) => (
+						<OtherForm
+							key={uuid()}
+							property={property}
+							name={name}
+							elements={elements}
+							handleFilter={handleFilter}
+							chosenFilters={chosenFilters}
+						/>
+					))}
+				</div>
+			</form>
+		</>
 	);
 };
 

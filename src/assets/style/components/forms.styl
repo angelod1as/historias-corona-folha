@@ -17,3 +17,32 @@
 			background: $white url('../images/arrow-up-down-black.svg') 95% center no-repeat
 			background-size: 9px
 			color: $secondary
+
+.filtering
+	transition: all 1s
+	.toggle-button
+		font-family: $base-font-family
+		font-weight: 500
+		background: none
+		appearance: none
+		border: 1px solid $secondary
+		border-radius: 3px
+		padding: 10px 40px
+		cursor: pointer
+		width: 100%
+		color: $secondary
+		text-transform: uppercase
+		display: flex
+		align-items: center
+		justify-content: center
+		margin-bottom: 30px
+	.open
+		display: block
+	.closed
+		display: none
+	+above($bp-small)
+		.toggle-button
+			display: none
+		.closed
+		.open
+			display: block

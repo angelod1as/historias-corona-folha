@@ -4,6 +4,11 @@
 $secondary = $gray-150
 $primary = $black
 
+// breakpoints
+$bp-big = 1200px
+$bp-medium = 1000px
+$bp-small = 700px
+
 body, html {
 	background-color: $dark
 }
@@ -36,14 +41,27 @@ body, html {
 			display: grid
 			grid-template-columns: 300px 1fr 300px
 			grid-template-areas: "left center right"
-			column-gap: 45px
+			gap: 45px
+
+			+below($bp-big)
+				grid-template-columns: 200px 1fr 300px
+
+			+below($bp-medium)
+				grid-template-columns: 200px 1fr
+				grid-template-areas: "left center" ". right"
+
+			+below($bp-small)
+				gap: 0
+				grid-template-columns: 1fr
+				grid-template-areas: "left" "center" "right"
+				&.profile
+					grid-template-areas: "center" "left" "right"
 
 		.footer
 			font-size: 16px
 			& > div
 				grid-area: center
 				color: $secondary
-				margin-left: calc(40px + 13px)
 			span
 				display: block
 			&__role

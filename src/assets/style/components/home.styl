@@ -9,9 +9,10 @@
 		display: flex
 		align-items: flex-end
 		margin-bottom: 30px
-		margin-left: calc(40px + 13px) // column width + gap
 		color: $primary
 		font-family: $base-font-family
+		+above($bp-small)
+			margin-left: calc(40px + 13px) // column width + gap
 
 		.order-select
 			cursor: pointer;
@@ -23,6 +24,7 @@
 			font-family: $base-font-family
 		.order-icon
 			// removing button look
+			font-family: $base-font-family
 			background: none
 			appearance: none
 			border: 0
