@@ -1,6 +1,26 @@
 // This file overrides Folha's elements default CSS, like titles and headers.
 
-// centering and coloring header
+// coloring header
+.f-header
+	background-color: #1f1f1f
+	color: #fff
+	.f-header__wrapper
+	.f-masthead
+	.f-toolbar_header
+		border-color: #444444
+	.f-brand__text
+		fill: #fff
+	.f-brand__stars
+		&:nth-child(2)
+			fill: #fff
+	.f-nav__list
+		.f-nav__item
+			color: #fff
+			a
+				color: #fff
+
+
+// centering and coloring title
 .f-kicker
 	text-align: center
 	color: #4CA5C5
@@ -21,3 +41,12 @@
 
 .f-share__list
 	text-align: center
+
+// coloring footer
+.f-footer
+	color: #757575
+	.f-followus__icon
+		border-color: #757575
+		svg
+			path
+				fill: #757575

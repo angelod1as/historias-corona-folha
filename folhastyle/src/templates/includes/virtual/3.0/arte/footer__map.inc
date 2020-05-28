@@ -1,1 +1,0 @@
-<!--#include file="footer__script-resize.inc"-->

@@ -8,7 +8,7 @@ const footerInfo = [
 ];
 
 const Footer = () => (
-	<footer className="center footer">
+	<div className="center footer">
 		<div>
 			{footerInfo.map(({ role, name }) => (
 				<p key={uuid()}>
@@ -17,7 +17,7 @@ const Footer = () => (
 				</p>
 			))}
 		</div>
-	</footer>
+	</div>
 );
 
 export default Footer;
